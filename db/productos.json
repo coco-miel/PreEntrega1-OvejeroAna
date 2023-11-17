@@ -1,0 +1,11 @@
+[
+  {
+    "id": "a14a4a75-1758-46b5-9c28-273cf6fa97e1",
+    "title": "Producto",
+    "description": "descripcion",
+    "price": 200,
+    "thumbnail": "imagen1.jpg",
+    "code": "ABC123",
+    "stock": 25
+  }
+]

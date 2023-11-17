@@ -1,14 +1,12 @@
 import fs from "fs/promises";
-import { Product } from "./Product.js";
+import { Product } from "../models/Product.js";
 import crypto from "crypto";
+
 export class ProductManager {
   constructor(path) {
     this.path = path;
   }
 
-  //crea un id auto incrementable
-
-  //agrega un producto
   async addProduct({ title, description, price, thumbnail, code, stock }) {
     const products = await this.getProducts();
     const productToAdd = products.find((product) => product.code === code);
@@ -22,7 +20,6 @@ export class ProductManager {
       code,
       stock,
     });
-    // Verificar si ya existe un producto con el mismo código
     if (!productToAdd) {
       products.push(newProduct);
       await fs.writeFile(this.path, JSON.stringify(products, null, 2), "utf-8");
@@ -33,13 +30,11 @@ export class ProductManager {
     );
   }
 
-  //consultar por todos los productos
   async getProducts() {
     const data = await fs.readFile(this.path, "utf-8");
     return JSON.parse(data) || [];
   }
 
-  //consultar por un producto especificado por id
   async getProductById(id) {
     const products = await this.getProducts();
     const productToFind = products.find((p) => p.id === id);
