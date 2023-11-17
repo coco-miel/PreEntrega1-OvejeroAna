@@ -1,33 +1,52 @@
 import fs from "fs/promises";
 import { Product } from "../models/Product.js";
-import crypto from "crypto";
 
 export class ProductManager {
   constructor(path) {
     this.path = path;
   }
 
-  async addProduct({ title, description, price, thumbnail, code, stock }) {
+  async addProduct({
+    title,
+    description,
+    code,
+    price,
+    stock,
+    category,
+    thumbnails,
+  }) {
     const products = await this.getProducts();
-    const productToAdd = products.find((product) => product.code === code);
-    const id = crypto.randomUUID();
+
+    if (products.some((product) => product.code === code)) {
+      throw new Error("El código ya existe para otro producto.");
+    }
+
     const newProduct = new Product({
-      id,
       title,
       description,
-      price,
-      thumbnail,
       code,
+      price,
       stock,
+      category,
+      thumbnails,
     });
-    if (!productToAdd) {
-      products.push(newProduct);
-      await fs.writeFile(this.path, JSON.stringify(products, null, 2), "utf-8");
-      return;
+    products.push(newProduct);
+
+    await this.saveProductsToFile(products);
+
+    return newProduct;
+  }
+
+  async saveProductsToFile(products) {
+    try {
+      await fs.writeFile(
+        this.path,
+        JSON.stringify(products, null, 2),
+        "utf8"
+      );
+    } catch (error) {
+      console.error("Error al guardar productos en el archivo:", error);
     }
-    throw new Error(
-      `El producto con el codigo ${code} ya existe, no puede volver a agregarse`
-    );
   }
 
   async getProducts() {
