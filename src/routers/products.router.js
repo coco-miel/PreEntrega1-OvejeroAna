@@ -6,7 +6,9 @@ import {
   deleteProductController,
 } from "../controllers/product.controller.js";
 import { Router } from "express";
+
 export const productRouter = Router();
+
 productRouter.get("/", getProductController);
 productRouter.get("/:id", getProductControllerId);
 productRouter.post("/", postProductController);

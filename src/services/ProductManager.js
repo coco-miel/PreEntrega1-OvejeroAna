@@ -51,13 +51,11 @@ export class ProductManager {
     }
   }
 
-  //consultar por todos los productos
   async getProducts() {
     const data = await fs.readFile(this.path, "utf-8");
     return JSON.parse(data) || [];
   }
 
-  //consultar por un producto especificado por id
   async getProductById(id) {
     const products = await this.getProducts();
     const productToFind = products.find((p) => p.id === id);

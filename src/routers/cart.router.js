@@ -8,6 +8,7 @@ import {
 import { Router } from "express";
 
 export const cartRouter = Router();
+
 cartRouter.get("/:cid", getCartByIdController);
 cartRouter.get("/", getCartsController);
 cartRouter.post("/", postCartController);

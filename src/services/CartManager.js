@@ -26,7 +26,6 @@ class CartManager {
       return [];
     }
   }
-  
 
   async getCartById(id) {
     const carts = await this.getCarts();
@@ -55,23 +54,21 @@ class CartManager {
     const productIndexFind = cart.products.findIndex(
       (p) => p.id === product.id
     );
-  
+
     if (productIndexFind === -1) {
       cart.products.push({ id: product.id, quantity: initialQuantity });
     } else {
       const newQuantity = cart.products[productIndexFind].quantity + 1;
-  
+
       if (newQuantity <= product.stock) {
         cart.products[productIndexFind].quantity = newQuantity;
       } else {
         throw new Error(`Limite maximo de stock de:  ${pid}`);
       }
     }
-  
+
     await fs.writeFile(this.path, JSON.stringify([cart], null, 2), "utf8");
   }
-  
-  
 }
 
 export const cartManager = new CartManager("./db/carrito.json");
