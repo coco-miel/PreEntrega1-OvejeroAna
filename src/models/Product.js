@@ -1,7 +1,6 @@
-import crypto from "crypto";
-
 export class Product {
   constructor({
+    id,
     title,
     description,
     code,
@@ -11,25 +10,29 @@ export class Product {
     category,
     thumbnails,
   }) {
-    this.id = this.generateId();
-    this.title = this.notNull(title);
-    this.description = this.notNull(description);
-    this.code = this.notNull(code);
-    this.price = this.notNull(price);
-    this.status = this.notNull(status);
-    this.stock = this.notNull(stock);
-    this.category = this.notNull(category);
-    this.thumbnails = thumbnails || [];
+    this.id = notNull(id);
+    this.title = notNull(title);
+    this.description = notNull(description);
+    this.code = notNull(code);
+    this.price = notNegative(price);
+    this.status = notNull(Boolean(status));
+    this.stock = notNegative(stock);
+    this.category = notNull(category);
+    this.thumbnails = notNull([thumbnails]);
   }
+}
 
-  generateId() {
-    return crypto.randomUUID();
+export function notNull(data) {
+  if (data === null || data === undefined) {
+    throw new Error("Ingresaste datos invalidos");
   }
+  return data;
+}
 
-  notNull(data) {
-    if (data === null || data === undefined) {
-      throw new Error("Ingresaste datos invalidos");
-    }
-    return data;
+function notNegative(value) {
+  const numericValue = notNull(Number(value));
+  if (numericValue < 0) {
+    throw new Error("No puede ser menor a 0");
   }
+  return numericValue;
 }

@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import { Product } from "../models/Product.js";
+import crypto from "crypto";
 
 export class ProductManager {
   constructor(path) {
@@ -11,27 +12,32 @@ export class ProductManager {
     description,
     code,
     price,
+    status,
     stock,
     category,
     thumbnails,
   }) {
     const products = await this.getProducts();
+    const productToAdd = products.find((product) => product.code === code);
 
-    if (products.some((product) => product.code === code)) {
-      throw new Error("El código ya existe para otro producto.");
+    if (productToAdd) {
+      throw new Error(`El producto con el código ${code} ya existe.`);
     }
 
+    const id = crypto.randomUUID();
     const newProduct = new Product({
+      id,
       title,
       description,
       code,
       price,
+      status,
       stock,
       category,
       thumbnails,
     });
-    products.push(newProduct);
 
+    products.push(newProduct);
     await this.saveProductsToFile(products);
 
     return newProduct;
@@ -39,21 +45,19 @@ export class ProductManager {
 
   async saveProductsToFile(products) {
     try {
-      await fs.writeFile(
-        this.path,
-        JSON.stringify(products, null, 2),
-        "utf8"
-      );
+      await fs.writeFile(this.path, JSON.stringify(products, null, 2), "utf-8");
     } catch (error) {
       console.error("Error al guardar productos en el archivo:", error);
     }
   }
 
+  //consultar por todos los productos
   async getProducts() {
     const data = await fs.readFile(this.path, "utf-8");
     return JSON.parse(data) || [];
   }
 
+  //consultar por un producto especificado por id
   async getProductById(id) {
     const products = await this.getProducts();
     const productToFind = products.find((p) => p.id === id);
@@ -95,3 +99,5 @@ export class ProductManager {
     throw new Error(`El producto con id ${id} no se encuentra o no existe`);
   }
 }
+
+export const productManager = new ProductManager("./db/productos.json");

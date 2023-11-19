@@ -1,11 +1,32 @@
 [
   {
-    "id": "a14a4a75-1758-46b5-9c28-273cf6fa97e1",
-    "title": "Producto",
-    "description": "descripcion",
-    "price": 200,
-    "thumbnail": "imagen1.jpg",
-    "code": "ABC123",
-    "stock": 25
+    "id": "67beaf3a-8226-4d18-888d-6b3807cd32e6",
+    "title": "Producto 1",
+    "description": "Descripcion",
+    "code": "NP1",
+    "price": 6,
+    "status": true,
+    "stock": 5,
+    "category": "Electronica",
+    "thumbnails": [
+      [
+        "image1.jpg",
+        "image2.jpg"
+      ]
+    ]
+  },
+  {
+    "id": "ba49d76e-b49a-49dc-bc6f-28320e09d599",
+    "title": "Producto Editado",
+    "description": "Descripcion ",
+    "code": "NP2",
+    "price": 20,
+    "status": true,
+    "stock": 10,
+    "category": "Electronica",
+    "thumbnails": [
+      "image1.jpg",
+      "image2.jpg"
+    ]
   }
 ]
