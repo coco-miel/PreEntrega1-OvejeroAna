@@ -29,7 +29,7 @@ export function notNull(data) {
   return data;
 }
 
-function notNegative(value) {
+export function notNegative(value) {
   const numericValue = notNull(Number(value));
   if (numericValue < 0) {
     throw new Error("No puede ser menor a 0");

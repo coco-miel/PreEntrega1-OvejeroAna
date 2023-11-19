@@ -11,4 +11,4 @@ app.use((err, res,) => {
   res.status(500).send("Hubo un error");
 });
 
-app.listen(8080, () => console.log("http://localhost:8080/api/products"));
+app.listen(8080, () => console.log("Ingresa en http://localhost:8080/api/products \n o en http://localhost:8080/api/carts"));
