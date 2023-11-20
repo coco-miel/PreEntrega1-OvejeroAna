@@ -1,32 +1,29 @@
 [
   {
-    "id": "67beaf3a-8226-4d18-888d-6b3807cd32e6",
-    "title": "Producto 1",
-    "description": "Descripcion",
-    "code": "NP1",
-    "price": 6,
+    "id": "b312d967-70c1-46e7-b699-0a73c4d7218a",
+    "title": "Test",
+    "description": "Producto",
+    "code": "TP001",
+    "price": 19.99,
     "status": true,
-    "stock": 5,
+    "stock": 50,
     "category": "Electronica",
     "thumbnails": [
-      [
-        "image1.jpg",
-        "image2.jpg"
-      ]
+      "thumbnail1.jpg"
     ]
   },
   {
-    "id": "ba49d76e-b49a-49dc-bc6f-28320e09d599",
-    "title": "Producto Editado",
-    "description": "Descripcion ",
-    "code": "NP2",
-    "price": 20,
+    "id": "5210d183-1bc2-41fd-9e8b-df53cb6f982e",
+    "title": "Test 32",
+    "description": "Producto",
+    "code": "TP002",
+    "price": 49.99,
     "status": true,
-    "stock": 10,
+    "stock": 25,
     "category": "Electronica",
     "thumbnails": [
-      "image1.jpg",
-      "image2.jpg"
+      "nested_thumbnail1.jpg",
+      "nested_thumbnail2.jpg"
     ]
   }
 ]

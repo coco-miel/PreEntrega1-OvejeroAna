@@ -5,9 +5,13 @@ const app = express();
 app.use(express.json());
 app.use("/api", apiRouter);
 
-app.use((err, res) => {
+app.use((req, res, next) => {
+  res.status(404).send("Not Found");
+});
+
+app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send("Hubo un error");
+  res.status(500).send("Hubo un error en el servidor");
 });
 
 app.listen(8080, () =>
@@ -15,3 +19,5 @@ app.listen(8080, () =>
     "Ingresa en http://localhost:8080/api/products \n o en http://localhost:8080/api/carts"
   )
 );
+
+

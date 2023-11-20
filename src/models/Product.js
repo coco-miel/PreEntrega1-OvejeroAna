@@ -18,7 +18,7 @@ export class Product {
     this.status = notNull(Boolean(status));
     this.stock = notNegative(stock);
     this.category = notNull(category);
-    this.thumbnails = notNull([thumbnails]);
+    this.thumbnails = formatThumbnails(thumbnails);
   }
 }
 
@@ -35,4 +35,11 @@ export function notNegative(value) {
     throw new Error("No puede ser menor a 0");
   }
   return numericValue;
+}
+
+export function formatThumbnails(thumbnails) {
+  if (!Array.isArray(thumbnails)) {
+    throw new Error("Thumbnails solo puede ser un array");
+  }
+  return thumbnails.flat();
 }
